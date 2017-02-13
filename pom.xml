@@ -30,6 +30,17 @@
         <plugin.jacoco.version>0.7.6.201602180812</plugin.jacoco.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>nexus.flungo.me</id>
+            <url>https://nexus.flungo.me/repository/maven-private-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus.flungo.me</id>
+            <url>https://nexus.flungo.me/repository/maven-private-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
