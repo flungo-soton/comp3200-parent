@@ -41,7 +41,7 @@
         </snapshotRepository>
         <site>
             <id>nexus.flungo.me</id>
-            <url>dav:https://nexus.flungo.me/repository/maven-private-sites/${project.groupId}/${project.artifactId}/${project.version}/</url>
+            <url>dav:https://nexus.flungo.me/repository/maven-private-sites/uk.ac.soton.ecs.fl4g12.crdt/</url>
         </site>
     </distributionManagement>
 
@@ -133,6 +133,9 @@
                         <version>2.12</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <stagingSiteURL>dav:https://nexus.flungo.me/repository/maven-private-sites/${project.groupId}/${project.artifactId}/${project.version}/</stagingSiteURL>
+                </configuration>
             </plugin>
         </plugins>
     </build>
