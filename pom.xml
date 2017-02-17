@@ -9,123 +9,25 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <properties>
-        <!-- Use UTF-8 source encoding -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Java compiler options -->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <!-- NetBeans hints -->
-        <netbeans.hint.license>mit</netbeans.hint.license>
-        <!-- Plugin versions -->
-        <plugin.maven-project-info-reports.version>2.9</plugin.maven-project-info-reports.version>
-        <plugin.maven-surefire.version>2.18.1</plugin.maven-surefire.version>
-        <plugin.maven-jxr.version>2.5</plugin.maven-jxr.version>
-        <plugin.maven-javadoc.version>2.10.3</plugin.maven-javadoc.version>
-        <plugin.maven-checkstyle.version>2.17</plugin.maven-checkstyle.version>
-        <plugin.maven-pmd.version>3.6</plugin.maven-pmd.version>
-        <plugin.mojo-versions.version>2.2</plugin.mojo-versions.version>
-        <plugin.mojo-findbugs.version>3.0.3</plugin.mojo-findbugs.version>
-        <plugin.mojo-taglist.version>2.4</plugin.mojo-taglist.version>
-        <plugin.jacoco.version>0.7.6.201602180812</plugin.jacoco.version>
-    </properties>
+    <parent>
+        <groupId>me.flungo</groupId>
+        <artifactId>flungo-private-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath></relativePath>
+    </parent>
 
     <distributionManagement>
-        <repository>
-            <id>nexus.flungo.me</id>
-            <url>https://nexus.flungo.me/repository/maven-private-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus.flungo.me</id>
-            <url>https://nexus.flungo.me/repository/maven-private-snapshots/</url>
-        </snapshotRepository>
         <site>
-            <id>nexus.flungo.me</id>
+            <id>flungo.me</id>
             <url>dav:https://nexus.flungo.me/repository/maven-private-sites/uk.ac.soton.ecs.fl4g12.crdt/</url>
         </site>
     </distributionManagement>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-core</artifactId>
-                <version>1.3</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <plugins>
-            <!-- Documentation plugins -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${plugin.maven-javadoc.version}</version>
-                <executions>
-                    <!-- Generate javadoc jars at verify phase to validate javadoc -->
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>jar</goal>
-                            <goal>test-jar</goal>
-                            <goal>aggregate-jar</goal>
-                            <goal>test-aggregate-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- JaCoCo coverage plugin -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${plugin.jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <id>jacoco-prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-prepare-agent-integration</id>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-report</id>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-integration</id>
-                        <goals>
-                            <goal>report-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules />
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <!-- Maven Site Plugin -->
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.6</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.wagon</groupId>
@@ -151,24 +53,6 @@
 
     <reporting>
         <plugins>
-            <!-- Project Info Reports -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${plugin.maven-project-info-reports.version}</version>
-            </plugin>
-            <!-- Surefire testing report -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>${plugin.maven-surefire.version}</version>
-            </plugin>
-            <!-- Java Cross Reference Reports -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>${plugin.maven-jxr.version}</version>
-            </plugin>
             <!-- JavaDoc Report -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -186,51 +70,6 @@
                     <show>private</show>
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                 </configuration>
-            </plugin>
-            <!-- Checkstyle Report -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${plugin.maven-checkstyle.version}</version>
-            </plugin>
-            <!-- Programming Mistake Detector -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${plugin.maven-pmd.version}</version>
-            </plugin>
-            <!-- Report on Maven Versions -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>${plugin.mojo-versions.version}</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>dependency-updates-report</report>
-                            <report>plugin-updates-report</report>
-                            <report>property-updates-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <!-- FindBugs Report -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${plugin.mojo-findbugs.version}</version>
-            </plugin>
-            <!-- Tag List Report -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>taglist-maven-plugin</artifactId>
-                <version>${plugin.mojo-taglist.version}</version>
-            </plugin>
-            <!-- JaCoCo Coverage Report -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${plugin.jacoco.version}</version>
             </plugin>
         </plugins>
     </reporting>
