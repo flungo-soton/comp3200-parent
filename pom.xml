@@ -38,20 +38,6 @@
   </dependencyManagement>
 
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <annotationProcessors>
-              <!-- Annotation processor for OpenIMAJ references -->
-              <annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
-            </annotationProcessors>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
     <plugins>
       <!-- Maven Site Plugin -->
       <plugin>
@@ -87,12 +73,6 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${plugin.maven-javadoc.version}</version>
         <configuration>
-          <!-- OpenIMAJ Reference formatting -->
-          <bottom><![CDATA[
-            <link rel="stylesheet" type="text/css" href="http://openimaj.org/css/reference.css" />
-            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-            <script type="text/javascript" src="http://openimaj.org/js/reference-jdk7.js"></script>
-          ]]></bottom>
           <!-- Create UML diagrams -->
           <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
           <docletArtifact>
@@ -108,4 +88,59 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <profiles>
+    <profile>
+      <id>openimaj-citation</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <file>
+          <exists>pom.openimaj-citation.profile</exists>
+        </file>
+      </activation>
+
+      <dependencies>
+        <dependency>
+          <groupId>org.openimaj</groupId>
+          <artifactId>core-citation</artifactId>
+        </dependency>
+      </dependencies>
+
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                <annotationProcessors>
+                  <!-- Annotation processor for OpenIMAJ references -->
+                  <annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
+                </annotationProcessors>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${plugin.maven-javadoc.version}</version>
+            <configuration>
+              <!-- OpenIMAJ Reference formatting -->
+              <bottom><![CDATA[
+                  <link rel="stylesheet" type="text/css" href="http://openimaj.org/css/reference.css" />
+                  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+                  <script type="text/javascript" src="http://openimaj.org/js/reference-jdk7.js"></script>
+                ]]></bottom>
+              <additionalparam>-views -all --allow-script-in-comments</additionalparam>
+            </configuration>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
+  </profiles>
 </project>
