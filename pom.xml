@@ -82,7 +82,6 @@
           </docletArtifact>
           <show>private</show>
           <useStandardDocletOptions>true</useStandardDocletOptions>
-          <!-- Additional parameters for UML diagrams and OpenIMAJ references -->
           <additionalparam>-views -all</additionalparam>
         </configuration>
       </plugin>
@@ -132,12 +131,10 @@
             <configuration>
               <!-- OpenIMAJ Reference formatting -->
               <bottom><![CDATA[
-                  <link rel="stylesheet" type="text/css" href="http://openimaj.org/css/reference.css" />
-                  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-                  <script type="text/javascript" src="http://openimaj.org/js/reference-jdk7.js"></script>
-                ]]></bottom>
-              <!-- Additional parameters for UML diagrams and OpenIMAJ references -->
-              <additionalparam>-views -all --allow-script-in-comments</additionalparam>
+                <link rel="stylesheet" type="text/css" href="http://openimaj.org/css/reference.css" />
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+                <script type="text/javascript" src="http://openimaj.org/js/reference-jdk7.js"></script>
+              ]]></bottom>
             </configuration>
           </plugin>
         </plugins>
