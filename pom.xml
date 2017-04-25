@@ -16,6 +16,12 @@
     <relativePath></relativePath>
   </parent>
 
+  <description>
+    Maven parent for Fabrizio Lungo's COMP3200 project providing a framework for the implementation
+    and replication of Conflict Free Replicated Data Types. This parent provides the dependency
+    management and common build configurations to be used across all modules.
+  </description>
+
   <properties>
     <org.openimaj.version>1.3.5</org.openimaj.version>
   </properties>
